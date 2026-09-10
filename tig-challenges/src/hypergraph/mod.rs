@@ -26,6 +26,7 @@ impl Solution {
 }
 
 pub struct Challenge {
+    /// Deterministic seed for solvers, derived from the instance generator's RNG.
     pub seed: [u8; 32],
     pub num_hyperedges: u32,
     pub num_nodes: u32,
@@ -353,7 +354,8 @@ impl Challenge {
         let max_part_size = ((num_nodes as f32 / num_parts as f32) * 1.03).ceil() as u32;
 
         Ok(Self {
-            seed: *seed,
+            // Expose fresh RNG output so solvers do not receive the instance generation seed.
+            seed: rng.gen(),
             num_hyperedges: track.n_h_edges,
             num_nodes: target_num_nodes - num_prune,
             num_parts,
