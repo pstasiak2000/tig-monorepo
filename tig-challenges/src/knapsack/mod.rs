@@ -1,7 +1,7 @@
 use crate::QUALITY_PRECISION;
 mod baselines;
 use anyhow::{anyhow, Result};
-use rand::{rngs::SmallRng, Rng, SeedableRng};
+use rand::{rngs::{SmallRng,StdRng}, Rng, SeedableRng};
 use serde::{Deserialize, Serialize};
 use std::{cell::RefCell, collections::HashSet, f64::consts::PI};
 

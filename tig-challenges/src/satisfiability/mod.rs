@@ -38,7 +38,7 @@ pub struct Challenge {
 
 impl Challenge {
     pub fn generate_instance(seed: &[u8; 32], track: &Track) -> Result<Self> {
-        let mut seed_rng = StdRng::from_seed(seed.clone())
+        let mut seed_rng = StdRng::from_seed(seed.clone());
         let mut rng = SmallRng::from_seed(seed_rng.r#gen());
         let num_clauses = (track.n_vars as f64 * track.ratio as f64 / 1000.0).floor() as usize;
 

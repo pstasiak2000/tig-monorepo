@@ -48,7 +48,7 @@ pub struct Challenge {
 
 impl Challenge {
     pub fn generate_instance(seed: &[u8; 32], track: &Track) -> Result<Self> {
-        let mut seed_rng = StdRng::from_seed(seed.clone())
+        let mut seed_rng = StdRng::from_seed(seed.clone());
         let mut rng = SmallRng::from_seed(seed_rng.r#gen());
         let ScenarioConfig {
             avg_op_flexibility,
@@ -200,7 +200,7 @@ impl Challenge {
             .collect::<Vec<_>>();
 
         Ok(Challenge {
-            seed: seed_rng.r#gen() 
+            seed: seed_rng.r#gen(),
             num_jobs: n_jobs,
             num_machines: n_machines,
             num_operations: n_op_types,
