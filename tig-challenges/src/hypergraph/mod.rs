@@ -355,7 +355,7 @@ impl Challenge {
 
         Ok(Self {
             // Expose fresh RNG output so solvers do not receive the instance generation seed.
-            seed: rng.gen(),
+            seed: rng.r#gen(),
             num_hyperedges: track.n_h_edges,
             num_nodes: target_num_nodes - num_prune,
             num_parts,
