@@ -139,7 +139,7 @@ impl Challenge {
         const VALIDATION_SIZE: usize = 200;
         const TEST_SIZE: usize = 250;
 
-        let mut seed_rng = StdRng::from_seed(seed.clone());
+        let mut rng = SmallRng::from_seed(StdRng::from_seed(seed.clone()).r#gen());
 
         let scaling_factor = RFF_AMPLITUDE_PER_FUNC * (2.0 / K_RFF as f32).sqrt();
 
@@ -210,7 +210,7 @@ impl Challenge {
         stream.synchronize()?;
 
         Ok(Self {
-            seed: seed_rng.r#gen(),
+            seed: rng.r#gen(),
             num_hidden_layers: track.n_hidden.clone(),
             hidden_layers_dims: 256,
             batch_size: 128,

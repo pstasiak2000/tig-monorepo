@@ -2,7 +2,7 @@ use crate::QUALITY_PRECISION;
 use anyhow::{anyhow, Result};
 use cudarc::driver::*;
 use cudarc::runtime::sys::cudaDeviceProp;
-use rand::{rngs::StdRng, Rng, SeedableRng};
+use rand::{rngs::{SmallRng,StdRng}, Rng, SeedableRng};
 use std::sync::Arc;
 
 impl_kv_string_serde! {
@@ -59,7 +59,8 @@ impl Challenge {
         stream: Arc<CudaStream>,
         _prop: &cudaDeviceProp,
     ) -> Result<Self> {
-        let mut rng = StdRng::from_seed(seed.clone());
+        let mut rng = SmallRng::from_seed(StdRng::from_seed(seed.clone()).r#gen());
+//let mut rng = StdRng::from_seed(seed.clone());
         let num_hyperedges = track.n_h_edges;
         let target_num_nodes = track.n_h_edges; // actual number may be around 8% less
         let depth = 6;
